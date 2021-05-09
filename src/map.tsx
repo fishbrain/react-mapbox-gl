@@ -9,7 +9,7 @@ import {
 } from './map-events';
 import { MapContext } from './context';
 import { createPortal } from 'react-dom';
-const isEqual = require('deep-equal'); //tslint:disable-line
+import isEqual from 'deep-equal';
 
 export interface PaddingOptions {
   top: number;
@@ -189,8 +189,6 @@ const ReactMapboxFactory = ({
         maxBounds
       } = this.props;
 
-      // tslint:disable-next-line:no-any
-      (MapboxGl as any).accessToken = accessToken;
       if (apiUrl) {
         // tslint:disable-next-line:no-any
         (MapboxGl as any).config.API_URL = apiUrl;
@@ -203,6 +201,7 @@ const ReactMapboxFactory = ({
       }
 
       const opts: MapboxGl.MapboxOptions = {
+        accessToken,
         preserveDrawingBuffer,
         hash,
         zoom: zoom[0],
